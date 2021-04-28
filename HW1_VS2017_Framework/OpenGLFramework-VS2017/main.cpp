@@ -407,6 +407,14 @@ void RenderScene(void) {
 	glBindVertexArray(m_shape_list[cur_idx].vao);
 	glDrawArrays(GL_TRIANGLES, 0, m_shape_list[cur_idx].vertex_count);
 	glBindVertexArray(0);
+	if (isDrawWireframe == true)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+	else if (isDrawWireframe == false)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
 	drawPlane();
 
 }
@@ -433,15 +441,13 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 		switch (key)
 		{
 		case GLFW_KEY_W:
-			if (isDrawWireframe)
+			if (isDrawWireframe  == true)
 			{
-				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-				isDrawWireframe = true;
-			}
-			else if (isDrawWireframe)
-			{
-				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 				isDrawWireframe = false;
+			}
+			else if (isDrawWireframe == false)
+			{
+				isDrawWireframe = true;
 			}
 			break;
 
