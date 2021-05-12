@@ -1,0 +1,14 @@
+﻿  glad.c
+  main.cpp
+c:\users\abc\desktop\碩一下\圖學\hw2\as02_framework\hw2_vs2017_framework\openglframework-vs2017\main.cpp(517): warning C4477: 'printf' : 格式字串 '%d' 需要 'int' 類型的引數，但 variadic 引數 1 的類型為 'unsigned __int64'
+  c:\users\abc\desktop\碩一下\圖學\hw2\as02_framework\hw2_vs2017_framework\openglframework-vs2017\main.cpp(517): note: 請考慮在格式字串中使用 '%zd'
+c:\users\abc\desktop\碩一下\圖學\hw2\as02_framework\hw2_vs2017_framework\openglframework-vs2017\main.cpp(517): warning C4477: 'printf' : 格式字串 '%d' 需要 'int' 類型的引數，但 variadic 引數 2 的類型為 'unsigned __int64'
+  c:\users\abc\desktop\碩一下\圖學\hw2\as02_framework\hw2_vs2017_framework\openglframework-vs2017\main.cpp(517): note: 請考慮在格式字串中使用 '%zd'
+c:\users\abc\desktop\碩一下\圖學\hw2\as02_framework\hw2_vs2017_framework\openglframework-vs2017\main.cpp(547): warning C4267: '=': 將 'size_t' 轉換為 'int'，資料可能遺失
+c:\users\abc\desktop\碩一下\圖學\hw2\as02_framework\hw2_vs2017_framework\openglframework-vs2017\main.cpp(579): warning C4305: '=': 從 'double' 轉換為 'GLfloat'，是由較大的類型轉換為較小的類型，可能導致資料遺失
+c:\users\abc\desktop\碩一下\圖學\hw2\as02_framework\hw2_vs2017_framework\openglframework-vs2017\main.cpp(599): warning C4305: '引數': 從 'double' 轉換為 'GLfloat'，是由較大的類型轉換為較小的類型，可能導致資料遺失
+  textfile.cpp
+c:\users\abc\desktop\碩一下\圖學\hw2\as02_framework\hw2_vs2017_framework\openglframework-vs2017\textfile.cpp(23): warning C4267: '=': 將 'size_t' 轉換為 'int'，資料可能遺失
+  正在產生程式碼...
+LINK : warning LNK4098: 預設的程式庫 'MSVCRT' 與其他使用的程式庫衝突，請使用 /NODEFAULTLIB:library
+  OpenGLFramework-VS2017.vcxproj -> C:\Users\ABC\Desktop\碩一下\圖學\hw2\AS02_Framework\HW2_VS2017_Framework\x64\Debug\OpenGLFramework-VS2017.exe
