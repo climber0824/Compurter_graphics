@@ -471,12 +471,200 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
 	// [TODO] mouse press callback function
+	switch (action)
+	{
+	case GLFW_PRESS:
+		glfwGetCursorPos(window, &starting_press_x, &starting_press_y);
+
+		mouse_pressed = true;
+		break;
+
+	case GLFW_RELEASE:
+		mouse_pressed = false;
+		break;
+
+	default:
+		break;
+	}
 		
 }
 
 static void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	// [TODO] cursor position callback function
+	double xdelta = xpos - starting_press_x;
+	double ydelta = ypos - starting_press_y;
+	starting_press_x = xpos;
+	starting_press_y = ypos;
+	double dis = 0.05;
+
+	if (mouse_pressed) {
+		switch (cur_trans_mode) {
+		case GeoTranslation:
+			if (xdelta > 1) {
+				models[cur_idx].position.x += dis;
+			}
+			else if (xdelta < -1) {
+				models[cur_idx].position.x -= dis;
+			}
+			else {
+			}
+
+			if (ydelta > 1) {
+				models[cur_idx].position.y -= dis;
+			}
+			else if (ydelta < -1) {
+				models[cur_idx].position.y += dis;
+			}
+			else {
+			}
+			break;
+
+		case GeoScaling:
+			if (xdelta > 1) {
+				models[cur_idx].scale.x += dis;
+			}
+			else if (xdelta < -1) {
+				models[cur_idx].scale.x -= dis;
+			}
+			else {
+			}
+
+			if (ydelta > 1) {
+				models[cur_idx].scale.y -= dis;
+			}
+			else if (ydelta < -1) {
+				models[cur_idx].scale.y += dis;
+			}
+			else {
+			}
+			break;
+
+		case GeoRotation:
+			if (xdelta > 1) {
+				models[cur_idx].rotation.y += dis;
+			}
+			else if (xdelta < -1) {
+				models[cur_idx].rotation.y -= dis;
+			}
+			else {
+			}
+
+			if (ydelta > 1) {
+				models[cur_idx].rotation.x += dis;
+			}
+			else if (ydelta < -1) {
+				models[cur_idx].rotation.x -= dis;
+			}
+			else {
+			}
+			break;
+
+		case ViewEye:
+			if (xdelta > 1) {
+				main_camera.position.x += 0.01;
+				setViewingMatrix();
+			}
+			else if (xdelta < -1) {
+				main_camera.position.x -= 0.01;
+				setViewingMatrix();
+			}
+			else {
+			}
+
+			if (ydelta > 1) {
+				main_camera.position.y -= 0.01;
+				setViewingMatrix();
+			}
+			else if (ydelta < -1) {
+				main_camera.position.y += 0.01;
+				setViewingMatrix();
+			}
+			else {
+			}
+			break;
+
+		case ViewCenter:
+			if (xdelta > 1) {
+				main_camera.center.x += 0.01;
+				setViewingMatrix();
+			}
+			else if (xdelta < -1) {
+				main_camera.center.x -= 0.01;
+				setViewingMatrix();
+			}
+			else {
+			}
+
+			if (ydelta > 1) {
+				main_camera.center.y -= 0.01;
+				setViewingMatrix();
+			}
+			else if (ydelta < -1) {
+				main_camera.center.y += 0.01;
+				setViewingMatrix();
+			}
+			else {
+			}
+			break;
+
+		case ViewUp:
+
+			if (xdelta > 1) {
+				main_camera.up_vector.x += 0.01;
+				setViewingMatrix();
+			}
+			else if (xdelta < -1) {
+				main_camera.up_vector.x -= 0.01;
+				setViewingMatrix();
+			}
+			else {
+			}
+
+			if (ydelta > 1) {
+				main_camera.up_vector.y -= 0.01;
+				setViewingMatrix();
+			}
+			else if (ydelta < -1) {
+				main_camera.up_vector.y += 0.01;
+				setViewingMatrix();
+			}
+			else {
+			}
+			break;
+
+		case LightEditing:
+			if (Light_Mode == 0)
+			{
+				if (xdelta > 1) { Light.d_position.x += dis; }
+				else if (xdelta < -1) { Light.d_position.x -= dis; }
+
+				if (ydelta > 1) { Light.d_position.y -= dis; }
+				else if (ydelta < -1) { Light.d_position.y += dis; }
+
+			}
+			else if (Light_Mode == 1)
+			{
+				if (xdelta > 1) { Light.p_position.x += dis; }
+				else if (xdelta < -1) { Light.p_position.x -= dis; }
+
+				if (ydelta > 1) { Light.p_position.y -= dis; }
+				else if (ydelta < -1) { Light.p_position.y += dis; }
+
+			}
+			else if (Light_Mode == 2)
+			{
+				if (xdelta > 1) { Light.s_position.x += dis; }
+				else if (xdelta < -1) { Light.s_position.x -= dis; }
+
+				if (ydelta > 1) { Light.s_position.y -= dis; }
+				else if (ydelta < -1) { Light.s_position.y += dis; }
+			}
+			break;
+
+
+		}
+	}
 }
 
 void setShaders()
