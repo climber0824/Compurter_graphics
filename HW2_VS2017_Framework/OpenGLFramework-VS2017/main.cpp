@@ -390,6 +390,82 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
 	// [TODO] scroll up positive, otherwise it would be negtive
+	switch (cur_trans_mode) {
+	case GeoTranslation:
+		models[cur_idx].position.z += yoffset / 2;
+		break;
+
+	case GeoScaling:
+		models[cur_idx].scale.z += yoffset / 2;
+		break;
+
+	case GeoRotation:
+		models[cur_idx].rotation.z += yoffset / 2;
+		break;
+
+	case ViewEye:
+		main_camera.position.z += yoffset / 2;
+		setViewingMatrix();
+		break;
+
+	case ViewCenter:
+		main_camera.center.z += yoffset / 2;
+		setViewingMatrix();
+		break;
+
+	case ViewUp:
+		cout << yoffset / 2;
+		cout << main_camera.up_vector;
+		main_camera.up_vector.z += yoffset / 2;
+		setViewingMatrix();
+		break;
+
+	case LightEditing:
+		if (Light_Mode == 2)
+		{
+			if (Light.cutoff <= 90 && Light.cutoff >= 0) { Light.cutoff += yoffset / 20; }
+			else if (Light.cutoff > 90) { Light.cutoff = 90; }
+			else if (Light.cutoff < 0) { Light.cutoff = 0; }
+		}
+		else if (Light_Mode == 0)
+		{
+			if (Light.d_diffuse_intensity.x >= 0 && Light.d_diffuse_intensity.y >= 0 && Light.d_diffuse_intensity.z >= 0)
+			{
+				Light.d_diffuse_intensity.x += yoffset / 20;
+				Light.d_diffuse_intensity.y += yoffset / 20;
+				Light.d_diffuse_intensity.z += yoffset / 20;
+			}
+			else if (Light.d_diffuse_intensity.x < 0 && Light.d_diffuse_intensity.y < 0 && Light.d_diffuse_intensity.z < 0)
+			{
+				Light.d_diffuse_intensity.x = 0;
+				Light.d_diffuse_intensity.y = 0;
+				Light.d_diffuse_intensity.z = 0;
+			}
+		}
+		else if (Light_Mode == 1)
+		{
+			if (Light.p_diffuse_intensity.x >= 0 && Light.p_diffuse_intensity.y >= 0 && Light.p_diffuse_intensity.z >= 0)
+			{
+				Light.p_diffuse_intensity.x += yoffset / 20;
+				Light.p_diffuse_intensity.y += yoffset / 20;
+				Light.p_diffuse_intensity.z += yoffset / 20;
+			}
+			else if (Light.p_diffuse_intensity.x < 0 && Light.p_diffuse_intensity.y < 0 && Light.p_diffuse_intensity.z < 0)
+			{
+				Light.p_diffuse_intensity.x = 0;
+				Light.p_diffuse_intensity.y = 0;
+				Light.p_diffuse_intensity.z = 0;
+			}
+		}
+
+		break;
+	case ShininessEditing:
+		printf("shininess: %f", Light.shininess);
+		Light.shininess += yoffset;
+		break;
+	default:
+		break;
+	}
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
