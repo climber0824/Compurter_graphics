@@ -322,6 +322,69 @@ void RenderScene(void) {
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	// [TODO] Call back function for keyboard
+	switch (action)
+	{
+		case GLFW_PRESS:
+			switch (key) 
+			{
+				case GLFW_KEY_Z:
+					cur_idx = (cur_idx + models.size() - 1) % models.size();
+					break;
+
+				case GLFW_KEY_X:
+					cur_idx = (cur_idx + 1) % models.size();
+					break;
+				
+				case GLFW_KEY_O:
+					setOrthogonal();
+					break;
+				
+				case GLFW_KEY_P:
+					setPerspective();
+					break;
+
+				case GLFW_KEY_T:
+					cur_trans_mode = GeoTranslation;
+					break;
+
+				case GLFW_KEY_S:
+					cur_trans_mode = GeoScaling;
+					break;
+
+				case GLFW_KEY_R:
+					cur_trans_mode = GeoRotation;
+					break;
+
+				case GLFW_KEY_E:
+					cur_trans_mode = ViewEye;
+					break;
+
+				case GLFW_KEY_C:
+					cur_trans_mode = ViewCenter;
+					break;
+
+				case GLFW_KEY_U:
+					cur_trans_mode = ViewUp;
+					break;
+
+				case GLFW_KEY_L:
+					Light_Mode = (Light_Mode + 1) % 3;
+					break;
+
+				case GLFW_KEY_K:
+					cur_trans_mode = LightEditing;
+					break;
+
+				case GLFW_KEY_J:
+					cur_trans_mode = ShininessEditing;
+					break;
+
+				case GLFW_KEY_ESCAPE:
+					exit(0);
+					break;
+				
+			}		
+	}
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
